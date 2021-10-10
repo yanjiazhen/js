@@ -34,3 +34,4 @@ var minWindow = function (s, t) {
     }
     return start === -1 ? '' : s.substr(start, minLen)
 };
+minWindow('ADOBECODEBANC','ABC')

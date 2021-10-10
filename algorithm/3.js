@@ -19,6 +19,7 @@
 var climbStairs = function(n) {
     let pre = 0, cur = 0, res = 1;
     for (let i = 1; i <= n; ++i) {
+        console.log(i)
         pre = cur;
         cur = res;
         res = pre + cur;

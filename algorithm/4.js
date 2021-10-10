@@ -31,6 +31,7 @@ var calculate = function(s) {
             f = s[i], n = ''
         } else n += s[i]
     }
+    console.log(q)
     return q.reduce((p, v) => p + (v | 0), 0)
 };
-calculate(3+2*2)
+calculate(3+2*2+3-4-6)

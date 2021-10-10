@@ -27,10 +27,8 @@ function deepClone1(obj) {
 const deepCopy = (sourceObj) => {
     // 如果不是对象则退出（可停止递归）
     if (typeof sourceObj !== 'object') return;
-
     // 深拷贝初始值：对象/数组
     let newObj = (sourceObj instanceof Array) ? [] : {};
-
     // 使用 for-in 循环对象属性（包括原型链上的属性）
     for (let key in sourceObj) {
         // 只访问对象自身属性
