@@ -68,3 +68,27 @@ function multiRequest(forms, max = 4) {
         start();
     });
 }
+
+function muti(urls, max = 6) {
+    return new Promise((resolve, reject) => {
+        let len = urls.length;
+        let cur = 0;
+        let count = 0;
+        let arr = []
+        function start() {
+            while (count < len && max > 0) {
+                max--
+                fetch(urls[cur]).then(res => {
+                    max++;
+                    count++;
+                    arr.push(res)
+                    if(count == len){
+                        resolve(arr)
+                    }
+                })
+            }
+
+        }
+        start()
+    })
+}

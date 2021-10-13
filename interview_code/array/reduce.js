@@ -22,7 +22,6 @@ Array.prototype.reduce = function (fn, initValue) {
     }
     return result
 }
-
 const arr = [1, 3, 6, 5]
 const mapArr = arr.reduce(item => item*2,6)
 console.log(mapArr)
