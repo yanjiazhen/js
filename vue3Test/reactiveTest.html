@@ -1,0 +1,29 @@
+<!-- 要求：实现响应式 -->
+<div id="app">{{counter}}</div>
+<script src="./reactiveTest.js"></script>
+<script>
+    const state = reactive({
+        counter: 1
+    })
+    // function update() {
+    //     let app = document.getElementById('app')
+    //     app.innerText = state.counter
+    // }
+    // 主动的放，如果多个update，就不太精确
+    // addDep(update)
+    // update()
+    // 通过传入effect回掉函数去执行更新函数
+    effect(() => {
+        let app = document.querySelector('#app')
+        app.innerText = state.counter
+        // console.log('返回元素',app)
+    })
+    // 或者直接写更新函数、即依赖收集
+    let timer = setInterval(() => {
+        state.counter++
+    }, 1000)
+
+    setTimeout(()=>{
+        clearInterval(timer)
+    },5000)
+</script>

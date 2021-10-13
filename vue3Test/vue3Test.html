@@ -1,0 +1,14 @@
+<div id="app">{{counter}}</div>
+<script src="http://unpkg.com/vue@next"></script>
+<script>
+    const {createApp, reactive} = Vue
+    const app = createApp({
+        setup(){
+            const state = reactive({
+                counter:1
+            })
+            return state
+        }
+    })
+    app.mount('#app')
+</script>
