@@ -12,7 +12,7 @@
     // 主动的放，如果多个update，就不太精确
     // addDep(update)
     // update()
-    // 通过传入effect回掉函数去执行更新函数
+    // 通过传入effect回掉函数去执行更新函数,
     effect(() => {
         let app = document.querySelector('#app')
         app.innerText = state.counter
