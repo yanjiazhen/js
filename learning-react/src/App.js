@@ -22,8 +22,20 @@ function App() {
 //     return <h1>Hello, {this.props.name}</h1>;
 //   }
 // }
+const list = ['波比跳', '深蹲']
 function Welcome(props) {
-  return <h1>Hello</h1>;
+  return (
+    <div>
+      <h2>运动列表</h2>
+      <ul>
+        {
+          list.map((item, ind) => {
+            return <li key={ind}>{item}</li>
+          })
+        }
+      </ul>
+    </div>
+  )
 }
 
 const element = <Welcome name="Sara" />;
