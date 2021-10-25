@@ -1,7 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import ReactDOM from 'react-dom';
+// import ReactDOM from 'react-dom';
 // function App() {
 //   return (
 //     <div className="App">
@@ -89,21 +89,125 @@ import ReactDOM from 'react-dom';
 // ReactDOM.render(<Student {...p}/>,document.getElementById('test'))
 
 // refs学习
-class Demo extends React.Component {
-  showDate = ()=>{
-    // const {input1} = this.refs
-    // const {input1} = React.createRef()
-    // console.log(React.createRef())
+// class Demo extends React.Component {
+//   state = { isHot: true }
+//   myRef = React.createRef()
+//   showDate = () => {
+//     // const {input1} = this.refs
+//     // const { input1 } = this // 回掉函数挂在组件实例上
+//     //  React.createRef()容器方式，this.myRef.current.value
+//     console.log(this.myRef.current.value)
+//   }
+//   changeWeater = () => {
+//     const { isHot } = this.state
+//     this.setState({ isHot: !isHot })
+//   }
+//   saveInput = (cur) => {
+//     this.input1 = cur
+//   }
+//   render() {
+//     const { isHot } = this.state
+//     return (
+//       <div>
+//         <h1 onClick={this.showDate} >refs的学习</h1>
+//         {/*<input ref={curNode => { this.input1 = curNode;console.log(this.input1) }} type="text" />*/}
+//         {/*<input ref={this.saveInput} type="text" />*/}
+//         <input ref={this.myRef} type="text" />
+//         <p>今天天气很{isHot ? '炎热' : '凉爽'}</p>
+//         <button onClick={this.changeWeater}>切换天气</button>
+//       </div>
+
+//     )
+//   }
+// }
+// ReactDOM.render(<Demo />, document.getElementById('root'))
+
+
+// // 受控组件非受控组件学习
+// class Login extends React.Component {
+//   handelSubmit = (e) => {
+//     e.preventDefault()
+//     console.log(this.state)
+//   }
+//   state = {
+//     userName: '',
+//     passWord: ''
+//   }
+//   // saveUsername = (e) => {
+//   //   this.setState({ userName: e.target.value })
+//   // }
+//   // savePassword = (e) => {
+//   //   this.setState({ passWord: e.target.value })
+
+//   // }
+//   // 这是初始化调用的值
+//   saveFormData = (userType) => {
+//     // 这个才是函数真正的回掉
+//     return (e) => {
+//       this.setState({ [userType]: e.target.value })
+//     }
+//   }
+//   render() {
+//     return (
+//       <form action="" onSubmit={this.handelSubmit}>
+//         用户名：<input type="text" onChange={this.saveFormData('userName')} name="username" />
+//         密码：<input type="text" onChange={this.saveFormData('passWord')} />
+//         <button>提交</button>
+//       </form>
+//     )
+//   }
+// }
+
+// 旧生命周期
+class Test extends React.Component {
+  render() {
+    console.log('Test---render')
+    return <div>name:{this.props.name}</div>
+  }
+}
+class Life extends React.Component {
+  constructor(props) {
+    console.log('Life---constructor')
+    super(props)
+    this.state = {
+      count: 1
+    }
+  }
+  // 组件即将挂载
+  componentWillMount() {
+    console.log('Life---componentWillMount组件即将挂载')
+  }
+  // 组件更新完毕
+  componentDidUpdate() {
+    console.log('Life---componentDidUpdate组件更新完毕')
+  }
+  // 组件即将卸载
+  componentWillUnmount() {
+    console.log('Life---componentWillUnmount组件即将卸载')
+
+  }
+  // 组件挂载完毕
+  componentDidMount() {
+    let time = setInterval(() => {
+      let { count } = this.state.count
+      count += 1
+      console.log(typeof count)
+      this.setState({ count: count })
+    }, 1000)
+    setTimeout(() => {
+      clearInterval(time)
+    }, 5000)
+    console.log('Life---componentDidMount组件挂载完毕', this.state.count)
   }
   render() {
+    console.log('Life---render')
     return (
       <div>
-        <h1 onClick={this.showDate} >refs的学习</h1>
-        <input ref="input1" type="text" />
+        <p>数字{this.state.count}</p>
+        <Test name="组件生命周期测试" />
       </div>
-
     )
   }
 }
-// ReactDOM.render(<Demo />, document.getElementById('root'))
-export default Demo;
+
+export default Life;

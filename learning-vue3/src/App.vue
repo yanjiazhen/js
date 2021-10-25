@@ -1,9 +1,9 @@
 <template>
-  <MenuList></MenuList>
+  <UploadBigFile></UploadBigFile>
 </template>
 
 <script setup>
-import MenuList from './components/MenuList.vue'
+import UploadBigFile from './components/UploadBigFile.vue'
 // import HelloWorld from './components/HelloWorld.vue'
 
 // export default {
