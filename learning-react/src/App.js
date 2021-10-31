@@ -1,6 +1,7 @@
 // import logo from './logo.svg';
 import './App.css';
 import React from 'react';
+import store from './store/store'
 // import ReactDOM from 'react-dom';
 // function App() {
 //   return (
@@ -158,56 +159,96 @@ import React from 'react';
 //   }
 // }
 
-// 旧生命周期
-class Test extends React.Component {
-  render() {
-    console.log('Test---render')
-    return <div>name:{this.props.name}</div>
+// // 旧生命周期
+// class Test extends React.Component {
+//   render() {
+//     console.log('Test---render')
+//     return <div>name:{this.props.name}</div>
+//   }
+// }
+// class Life extends React.Component {
+//   constructor(props) {
+//     console.log('Life---constructor')
+//     super(props)
+//     this.state = {
+//       count: 1
+//     }
+//   }
+//   // 从props派生的state
+//   static getDerivedStateFromProps(){
+//     console.log('Life-新生命周期getDerivdStateFromProps')
+//     return null
+//   }
+//   getSnapshotBeforeUpdate(){
+//     console.log('Life-新生命周期getSnapshotBeforeUpdate')
+//     return null
+//   }
+//   // 组件即将挂载
+//   // componentWillMount() {
+//   //   console.log('Life---componentWillMount组件即将挂载--新react将要废弃')
+//   // }
+//   // 组件更新完毕
+//   componentDidUpdate() {
+//     console.log('Life---componentDidUpdate组件更新完毕')
+//   }
+//   // 组件即将卸载
+//   componentWillUnmount() {
+//     console.log('Life---componentWillUnmount组件即将卸载')
+
+//   }
+//   // 组件挂载完毕
+//   componentDidMount() {
+//     let time = setInterval(() => {
+//       let { count } = this.state.count
+//       this.setState({ count: count++ })
+//     }, 1000)
+//     setTimeout(() => {
+//       clearInterval(time)
+//     }, 5000)
+//     console.log('Life---componentDidMount组件挂载完毕', this.state.count)
+//   }
+//   render() {
+//     console.log('Life---render')
+//     return (
+//       <div>
+//         <p>数字{this.state.count}</p>
+//         <Test name="组件生命周期测试" />
+//       </div>
+//     )
+//   }
+// }
+
+// redux
+class reduxTest extends React.Component {
+  increment = () => {
+    const { value } = this.selectNumber
+    const data = store.getState
+    store.dispatch({ type: 'increment', data: data + value * 1 })
   }
-}
-class Life extends React.Component {
-  constructor(props) {
-    console.log('Life---constructor')
-    super(props)
-    this.state = {
-      count: 1
+  decrement = () => {
+    const { value } = this.selectNumber
+    const data = store.getState
+    store.dispatch({ type: 'increment', data: data - value * 1 })
+  }
+  incrementIfOdd = () => {
+    const { value } = this.selectNumber
+    const data = store.getState
+    if (data % 2 !== 0) {
+      store.dispatch({ type: 'increment', data: data - value * 1 })
     }
   }
-  // 组件即将挂载
-  componentWillMount() {
-    console.log('Life---componentWillMount组件即将挂载')
-  }
-  // 组件更新完毕
-  componentDidUpdate() {
-    console.log('Life---componentDidUpdate组件更新完毕')
-  }
-  // 组件即将卸载
-  componentWillUnmount() {
-    console.log('Life---componentWillUnmount组件即将卸载')
-
-  }
-  // 组件挂载完毕
-  componentDidMount() {
-    let time = setInterval(() => {
-      let { count } = this.state.count
-      count += 1
-      console.log(typeof count)
-      this.setState({ count: count })
-    }, 1000)
-    setTimeout(() => {
-      clearInterval(time)
-    }, 5000)
-    console.log('Life---componentDidMount组件挂载完毕', this.state.count)
-  }
   render() {
-    console.log('Life---render')
-    return (
-      <div>
-        <p>数字{this.state.count}</p>
-        <Test name="组件生命周期测试" />
-      </div>
-    )
+    return (<div>
+      <h1>计数：{store.getState}</h1>
+      <select ref={c => this.selectNumber = c}>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+      </select>
+      <button onClick={this.increment}></button>
+      <button onClick={this.decrement}></button>
+      <button onClick={this.incrementIfodd}></button>
+    </div>)
   }
 }
-
-export default Life;
+export default reduxTest;
