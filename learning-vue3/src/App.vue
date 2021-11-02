@@ -1,10 +1,12 @@
 <template>
-  <UploadBigFile></UploadBigFile>
+  <!-- <UploadBigFile></UploadBigFile> -->
+  <MenuList></MenuList>
 </template>
 
 <script setup>
-import UploadBigFile from './components/UploadBigFile.vue'
+// import UploadBigFile from './components/UploadBigFile.vue'
 // import HelloWorld from './components/HelloWorld.vue'
+import MenuList from './components/MenuList.vue'
 
 // export default {
 //   name: 'App',
