@@ -1,8 +1,9 @@
 // import logo from './logo.svg';
 import './App.css';
 import React from 'react';
-import store from './store/store'
-import { incrementAction, decrementAction } from './store/count_action'
+import Header from './component/header'
+// import store from './store/store'
+// import { incrementAction, decrementAction } from './store/count_action'
 
 // import ReactDOM from 'react-dom';
 // function App() {
@@ -21,11 +22,16 @@ import { incrementAction, decrementAction } from './store/count_action'
 //     </div>
 //   );
 // }
-// class Welcome extends React.Component {
-//   render() {
-//     return <h1>Hello, {this.props.name}</h1>;
-//   }
-// }
+class Welcome extends React.Component {
+  render() {
+    return (
+      <div className="fit_list">
+        <h1>TodoList列表</h1>
+        <Header />
+      </div>
+    );
+  }
+}
 // const list = ['波比跳', '深蹲']
 // function Welcome(props) {
 //   return (
@@ -221,44 +227,44 @@ import { incrementAction, decrementAction } from './store/count_action'
 // }
 
 // redux
-class ReduxTest extends React.Component {
-  // debuger
-  componentDidMount() {
-    // console.log('store', store, store.getState())
-    store.subscribe(() => {
-      this.setState({})
-    })
-  }
-  increment = () => {
-    const { value } = this.selectNumber
-    store.dispatch(incrementAction(value*1))
-  }
-  decrement = () => {
-    const { value } = this.selectNumber
-    store.dispatch(decrementAction(value*1))
-  }
-  incrementIfOdd = () => {
-    const { value } = this.selectNumber
-    const data = store.getState()
-    if (data % 2 !== 0) {
-      store.dispatch(incrementAction(value*1))
-    }
-  }
-  render() {
-    return (
-      <div>
-        <h1>计数：{store.getState()}</h1>
-        <select ref={c => this.selectNumber = c}>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-        </select>
-        <button onClick={this.increment}>加</button>
-        <button onClick={this.decrement}>减</button>
-        <button onClick={this.incrementIfOdd}>奇数加</button>
-      </div>
-    )
+// class ReduxTest extends React.Component {
+//   // debuger
+//   componentDidMount() {
+//     // console.log('store', store, store.getState())
+//     store.subscribe(() => {
+//       this.setState({})
+//     })
+//   }
+//   increment = () => {
+//     const { value } = this.selectNumber
+//     store.dispatch(incrementAction(value*1))
+//   }
+//   decrement = () => {
+//     const { value } = this.selectNumber
+//     store.dispatch(decrementAction(value*1))
+//   }
+//   incrementIfOdd = () => {
+//     const { value } = this.selectNumber
+//     const data = store.getState()
+//     if (data % 2 !== 0) {
+//       store.dispatch(incrementAction(value*1))
+//     }
+//   }
+//   render() {
+//     return (
+//       <div>
+//         <h1>计数：{store.getState()}</h1>
+//         <select ref={c => this.selectNumber = c}>
+//           <option value="1">1</option>
+//           <option value="2">2</option>
+//           <option value="3">3</option>
+//         </select>
+//         <button onClick={this.increment}>加</button>
+//         <button onClick={this.decrement}>减</button>
+//         <button onClick={this.incrementIfOdd}>奇数加</button>
+//       </div>
+//     )
 
-  }
-}
-export default ReduxTest;
+//   }
+// }
+export default Welcome;
