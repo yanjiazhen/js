@@ -2,6 +2,45 @@
 import './App.css';
 import React from 'react';
 import Header from './component/header'
+import List from './component/list'
+import Footer from './component/footer'
+class Welcome extends React.Component {
+  state = {
+    todos: [
+      { id: 0, name: '深蹲', done: true },
+      { id: 1, name: '波比跳', done: true },
+      { id: 2, name: '呀卧起坐', done: false }]
+  }
+  addTodo = (data) => {
+    const { todos } = this.state
+    const newData = [data, ...todos]
+    this.setState({ todos: newData })
+  }
+  // 用于更新对象
+  updateTodo = (id, done) => {
+    const { todos } = this.state
+    const newObj = todos.map(todoObj => {
+      if (todoObj.id === id) {
+        return { ...todoObj, done: done }
+      } else {
+        return todoObj
+      }
+    })
+    console.log(newObj)
+    this.setState({ todos: newObj })
+  }
+  render() {
+    const { todos } = this.state
+    return (
+      <div className="fit_list">
+        <h1>TodoList列表</h1>
+        <Header addTodo={this.addTodo} />
+        <List todos={todos} updateTodo={this.updateTodo} />
+        <Footer />
+      </div>
+    );
+  }
+}
 // import store from './store/store'
 // import { incrementAction, decrementAction } from './store/count_action'
 
@@ -22,16 +61,6 @@ import Header from './component/header'
 //     </div>
 //   );
 // }
-class Welcome extends React.Component {
-  render() {
-    return (
-      <div className="fit_list">
-        <h1>TodoList列表</h1>
-        <Header />
-      </div>
-    );
-  }
-}
 // const list = ['波比跳', '深蹲']
 // function Welcome(props) {
 //   return (
