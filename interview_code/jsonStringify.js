@@ -10,8 +10,8 @@
 
 ### 特殊处理：
 * 类型是function 解析为 undefined
-* 数组遇到undefined解析为null
-* 对象遇到vaule值是undefined，则不解析这一对key-value值
+* 数组遇到undefined和function类型的解析为null,
+* 对象遇到vaule值是undefined或者类型是functioned，则不解析这一对key-value值
 */
 
 let str = "";
@@ -29,7 +29,7 @@ function objToStr(obj) {
     } else if (typeof param === "string") {
       simple = `"${param}"`;
     } else if (typeof param === "function") {
-      simple = `undefined`;
+      simple = type === "arr" ? null : `undefined`;
     } else if (typeof param === "boolean") {
       simple = `'${param}'`;
     }
@@ -61,11 +61,15 @@ function objToStr(obj) {
           objToStr(obj[i]);
         } else {
           obj[i] !== undefined &&
+            typeof obj[i] !== "function" &&
             (str += `"${i}":${baseFunction(obj[i], "obj")}`);
         }
         // 处理逗号
         let arr = Object.keys(obj);
-        i !== arr[arr.length - 1] && obj[i] !== undefined && (str += `,`);
+        i !== arr[arr.length - 1] &&
+          obj[i] !== undefined &&
+          typeof obj[i] !== "function" &&
+          (str += `,`);
       }
       str += `}`;
     }
@@ -73,5 +77,22 @@ function objToStr(obj) {
 
   return str || simple;
 }
-objToStr({ aa: undefined, bb: null, cc: "s" });
+// objToStr(["aa",{aa:function(){console.log(1)},bb:1}]);
+objToStr(["aa",function () {console.log(1);},{ bb: 1 },]);
+
 objToStr(undefined);
+
+console.log(
+  objToStr(undefined),
+  //   objToStr(["123", 123, { aa: "bb" }]),
+  //   objToStr(["123", 123]),
+  //   objToStr(123),
+  //   objToStr("123"),
+  //   objToStr({ aa: [123, { aa: 123 }] }),
+  //   JSON.stringify(["123", 123])
+  //   JSON.stringify(123)
+  //   JSON.stringify("123")
+  //   JSON.stringify({ aa: [123, { aa: 123 }] })
+  JSON.stringify(null)
+  //   JSON.stringify(["123", 123, { aa: "bb" }])
+);
