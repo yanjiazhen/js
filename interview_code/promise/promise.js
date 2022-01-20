@@ -1,3 +1,4 @@
+// https://juejin.cn/post/7043758954496655397?utm_source=gold_browser_extension
 /*
  *promise是一个类
  */
